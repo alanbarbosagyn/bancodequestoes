@@ -8,7 +8,7 @@ import javax.persistence.*;
  */
 @Entity
 public class Coordenador extends Professor {
-
+    
     public Coordenador() {
     }
 }

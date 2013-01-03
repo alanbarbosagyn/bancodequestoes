@@ -1,5 +1,6 @@
 package br.com.bancodequestoes.model;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 /**
@@ -7,13 +8,15 @@ import javax.persistence.*;
  * @author Alan
  */
 @Entity
-public class Alternativa {
+public class Alternativa implements Serializable {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
     
     private String descricao;
+    
+    @ManyToOne
     private Questao questao;
 
     public Alternativa() {
@@ -22,14 +25,14 @@ public class Alternativa {
     /**
      * @return the id
      */
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
