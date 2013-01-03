@@ -1,7 +1,9 @@
 package br.com.bancodequestoes.model;
 
 import java.util.Collection;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  *
