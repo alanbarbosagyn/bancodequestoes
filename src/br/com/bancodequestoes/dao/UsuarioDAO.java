@@ -25,4 +25,18 @@ public class UsuarioDAO {
             em.getTransaction().rollback();
         }
     }
+    
+    public void buscar(Usuario a){
+        EntityManager em = DAO.getEmf();
+        
+        try{
+            em.getTransaction().begin();
+            
+            em.find(Usuario.class, a);
+            
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
+        }
+    }
 }

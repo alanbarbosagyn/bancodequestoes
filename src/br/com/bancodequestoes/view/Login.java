@@ -4,6 +4,8 @@
  */
 package br.com.bancodequestoes.view;
 
+import br.com.bancodequestoes.dao.UsuarioDAO;
+import br.com.bancodequestoes.model.Usuario;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
@@ -156,13 +158,32 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
+    
+    
     private void cancelarLogin(ActionEvent evt) {
         System.exit(0);
     }
 
     private void login(ActionEvent evt) {
-        if(jTextField1.getText().equalsIgnoreCase("")){
-            JOptionPane.showMessageDialog(rootPane, "Campo Nome vazio!");
-        } 
+        if(getName().equalsIgnoreCase("") || getPassword().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(rootPane, "Campo Nome ou Senha vazio!");
+        }
+        Usuario usuario = new Usuario();
+        usuario.setNome(getNome());
+        new UsuarioDAO().buscar(usuario);
+    }
+
+    /**
+     * @return the Password
+     */
+    public String getPassword() {
+        return new String(jPasswordField1.getPassword());
+    }
+    
+    /**
+     * @return the Name
+     */
+    public String getNome(){
+        return jTextField1.getText();
     }
 }
