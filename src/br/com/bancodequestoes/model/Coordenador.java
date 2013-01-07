@@ -1,6 +1,6 @@
 package br.com.bancodequestoes.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 
 /**
  *

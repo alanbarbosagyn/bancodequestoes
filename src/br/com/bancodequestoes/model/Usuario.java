@@ -8,14 +8,17 @@ import javax.persistence.*;
  *
  * @author Alan
  */
+@NamedNativeQuery(name="Usuario.busca", query="SELECT p FROM Usuario p WHERE p.nome like 'alan'")
 @Entity
 public class Usuario implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
     
+    @Column(unique=true)
     private String nome;
     
+    @Column(length=8)
     private String senha;
     
     @Temporal(javax.persistence.TemporalType.DATE)

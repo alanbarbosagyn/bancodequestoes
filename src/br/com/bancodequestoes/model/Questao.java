@@ -16,7 +16,7 @@ public class Questao implements Serializable {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
     
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -26,8 +26,7 @@ public class Questao implements Serializable {
     private Calendar dataModificacao;
     
     private String usuarioCriador;
-    
-    @Temporal(javax.persistence.TemporalType.DATE)
+   
     private String usuarioModificador;
     
     private String enunciado;
@@ -35,7 +34,7 @@ public class Questao implements Serializable {
     @OneToOne
     private Alternativa resposta;
     
-    @OneToMany
+    @OneToMany(cascade= CascadeType.ALL)
     private Collection<Alternativa> alternativas;
     
     @ManyToMany(mappedBy = "questao")

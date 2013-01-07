@@ -7,6 +7,8 @@ package br.com.bancodequestoes.view;
 import br.com.bancodequestoes.dao.UsuarioDAO;
 import br.com.bancodequestoes.model.Usuario;
 import java.awt.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -44,8 +46,6 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setText("Senha:");
 
-        jPasswordField1.setText("jPasswordField1");
-
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,27 +60,24 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("jTextField1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jButtonCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonLogin))
+                        .addComponent(jButtonLogin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addComponent(jButtonCancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPasswordField1)
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                             .addComponent(jTextField1))))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
@@ -106,21 +103,25 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-         cancelarLogin(evt);
+        cancelarLogin(evt);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-         login(evt);
+        login(evt);
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /*
+         * Set the Nimbus look and feel
+         */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the
+         * default look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -140,16 +141,17 @@ public class Login extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /*
+         * Create and display the form
+         */
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new Login().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JLabel jLabel1;
@@ -158,19 +160,27 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
-    
-    
     private void cancelarLogin(ActionEvent evt) {
         System.exit(0);
     }
 
     private void login(ActionEvent evt) {
-        if(getName().equalsIgnoreCase("") || getPassword().equalsIgnoreCase("")){
+        if (getNome().equalsIgnoreCase("") || getPassword().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(rootPane, "Campo Nome ou Senha vazio!");
         }
-        Usuario usuario = new Usuario();
-        usuario.setNome(getNome());
-        new UsuarioDAO().buscar(usuario);
+        try {
+            
+            Usuario usuario = new UsuarioDAO().buscar(getNome());
+            
+            if(!usuario.getSenha().equalsIgnoreCase(getPassword()))
+                JOptionPane.showMessageDialog(rootPane, "Senha incorreta!");
+            
+            new TelaPrincipal().setVisible(true);
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "Usuário inexistente!");
+        }
+        
     }
 
     /**
@@ -179,11 +189,11 @@ public class Login extends javax.swing.JFrame {
     public String getPassword() {
         return new String(jPasswordField1.getPassword());
     }
-    
+
     /**
      * @return the Name
      */
-    public String getNome(){
+    public String getNome() {
         return jTextField1.getText();
     }
 }

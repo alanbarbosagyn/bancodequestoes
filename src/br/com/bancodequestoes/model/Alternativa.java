@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Alternativa implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
     
     private String descricao;

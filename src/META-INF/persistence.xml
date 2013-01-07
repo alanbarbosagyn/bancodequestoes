@@ -10,11 +10,15 @@
     <class>br.com.bancodequestoes.model.Questao</class>
     <class>br.com.bancodequestoes.model.Usuario</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/app"/>
-      <property name="javax.persistence.jdbc.password" value="app"/>
-      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-      <property name="javax.persistence.jdbc.user" value="app"/>
-      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/banco_questoes"/>
+            <property name="javax.persistence.jdbc.password" value="alan"/>
+            <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+            <property name="javax.persistence.jdbc.user" value="alan"/>
+            
+            
+            
+        <property name="eclipselink.create-ddl-jdbc-file-name" value="createDDL_ddlGeneration.jdbc"/><property name="eclipselink.drop-ddl-jdbc-file-name" value="dropDDL_ddlGeneration.jdbc"/><property name="eclipselink.ddl-generation.output-mode" value="database"/>
+      http://wiki.eclipse.org/EclipseLink/Examples/JPA/DDL
     </properties>
   </persistence-unit>
 </persistence>

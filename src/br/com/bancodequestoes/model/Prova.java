@@ -3,12 +3,7 @@ package br.com.bancodequestoes.model;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
+import javax.persistence.*;
 
 /**
  *
@@ -21,7 +16,7 @@ public class Prova implements Serializable {
     }
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
     
     private String nome;
