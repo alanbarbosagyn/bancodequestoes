@@ -3,6 +3,7 @@ package br.com.bancodequestoes.model;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -16,15 +17,17 @@ public class Prova implements Serializable {
     }
     
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     
+    @Column(nullable=false, length=50)
     private String nome;
     
     @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(nullable=false)
     private Calendar dataElaboracao;
 
-    @OneToMany(mappedBy = "prova")
+    @ManyToMany(mappedBy = "provas")
     private Collection<Questao> questao;
 
     @ManyToOne

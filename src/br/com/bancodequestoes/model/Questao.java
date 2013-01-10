@@ -16,9 +16,10 @@ public class Questao implements Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     
+    @Column(nullable=false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar dataCriacao;
     
@@ -29,19 +30,20 @@ public class Questao implements Serializable {
    
     private String usuarioModificador;
     
+    @Column(nullable=false, length=250)    
     private String enunciado;
     
     @OneToOne
     private Alternativa resposta;
     
-    @OneToMany(cascade= CascadeType.ALL)
+    @OneToMany(cascade= CascadeType.ALL, mappedBy="questao")
     private Collection<Alternativa> alternativas;
     
-    @ManyToMany(mappedBy = "questao")
+    @ManyToMany(mappedBy = "questoes")
     private Collection<Assunto> assuntos;
     
-    @ManyToOne
-    private Prova prova;
+    @ManyToMany
+    private Collection<Prova> provas;
 
     /**
      * @return the id
@@ -172,15 +174,15 @@ public class Questao implements Serializable {
     /**
      * @return the prova
      */
-    public Prova getProva() {
-        return prova;
+    public Collection<Prova> getProvas() {
+        return provas;
     }
 
     /**
      * @param prova the prova to set
      */
-    public void setProva(Prova prova) {
-        this.prova = prova;
+    public void setProvas(Collection<Prova> provas) {
+        this.provas = provas;
     }
     
 }

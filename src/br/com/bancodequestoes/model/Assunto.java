@@ -1,12 +1,10 @@
 package br.com.bancodequestoes.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import java.util.List;
+import javax.persistence.*;
 
 /**
  *
@@ -19,13 +17,14 @@ public class Assunto implements Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     
+    @Column(nullable=false)
     private String nome;
     
     @ManyToMany
-    private Collection<Questao> questao;
+    private Collection<Questao> questoes;
 
     /**
      * @return the id
@@ -59,13 +58,13 @@ public class Assunto implements Serializable {
      * @return the questao
      */
     public Collection<Questao> getQuestao() {
-        return questao;
+        return questoes;
     }
 
     /**
      * @param questao the questao to set
      */
     public void setQuestao(Collection<Questao> questao) {
-        this.questao = questao;
+        this.questoes = questao;
     }
 }

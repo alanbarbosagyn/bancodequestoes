@@ -8,11 +8,12 @@ import javax.persistence.*;
  *
  * @author Alan
  */
-@NamedNativeQuery(name="Usuario.busca", query="SELECT p FROM Usuario p WHERE p.nome like 'alan'")
+@NamedQuery(name="Usuario.buscaPorNome", query="SELECT p FROM Usuario p WHERE p.nome like :nome")
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 @Entity
 public class Usuario implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     
     @Column(unique=true)

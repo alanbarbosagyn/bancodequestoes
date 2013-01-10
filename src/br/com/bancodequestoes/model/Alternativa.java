@@ -11,9 +11,10 @@ import javax.persistence.*;
 public class Alternativa implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     
+    @Column(nullable=false)
     private String descricao;
     
     @ManyToOne
