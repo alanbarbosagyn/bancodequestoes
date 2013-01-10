@@ -111,7 +111,6 @@ public class Login extends javax.swing.JFrame {
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
         login(evt);
     }//GEN-LAST:event_jButtonLoginActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonLogin;
@@ -130,35 +129,29 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Campo Nome ou Senha vazio!");
         }
         try {
-            
+
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("BancoDeQuestoesPU");
             UsuarioJpaController userDao = new UsuarioJpaController(emf);
-            
+
             EntityManager em = emf.createEntityManager();
-            
+
             javax.persistence.Query query = em.createNamedQuery("Usuario.buscaPorNome");
-            query.setParameter("nome","alan");
-            
-            List<Usuario> u =query.getResultList();
-            Usuario usuario = null;
-            
-            for(Usuario user : u){
-                usuario = user;
-            }
-            
-            System.out.println("Okk");
-            
-            if(!usuario.getSenha().equalsIgnoreCase(getPassword()))
+
+            query.setParameter("nome", getNome());
+
+            Usuario usuario = (Usuario) query.getSingleResult();
+
+            if (!usuario.getSenha().equalsIgnoreCase(getPassword())) {
                 JOptionPane.showMessageDialog(rootPane, "Senha incorreta!");
-            
-            
-            new TelaPrincipal().setVisible(true);
-            this.setVisible(false);
-            
+            } else {
+                this.dispose();
+                new TelaPrincipal().setVisible(true);
+            }
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, "Usuário inexistente!");
         }
-        
+
     }
 
     /**

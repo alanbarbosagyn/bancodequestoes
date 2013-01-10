@@ -4,6 +4,15 @@
  */
 package br.com.bancodequestoes.view;
 
+import br.com.bancodequestoes.dao.UsuarioJpaController;
+import br.com.bancodequestoes.model.Coordenador;
+import br.com.bancodequestoes.model.Professor;
+import br.com.bancodequestoes.model.Usuario;
+import java.util.Calendar;
+import javax.persistence.Persistence;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Alan
@@ -34,6 +43,8 @@ public class FormUsuario extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
 
         jLabel1.setText("Nome:");
 
@@ -42,6 +53,11 @@ public class FormUsuario extends javax.swing.JPanel {
         jLabel3.setText("Repita a senha:");
 
         jButton1.setText("Salvar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -49,6 +65,15 @@ public class FormUsuario extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Usuário", "Professor", "Coordenador" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Tipo de Usuário:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -60,14 +85,17 @@ public class FormUsuario extends javax.swing.JPanel {
                     .addComponent(jButton1)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                    .addComponent(jButton2)
-                    .addComponent(jPasswordField1)
-                    .addComponent(jPasswordField2))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addComponent(jPasswordField1)
+                        .addComponent(jPasswordField2)))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,26 +112,141 @@ public class FormUsuario extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(124, Short.MAX_VALUE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        fecharJanela();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        novoUsuario();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the jPasswordField1
+     */
+    public javax.swing.JPasswordField getjPasswordField1() {
+        return jPasswordField1;
+    }
+
+    /**
+     * @param jPasswordField1 the jPasswordField1 to set
+     */
+    public void setjPasswordField1(javax.swing.JPasswordField jPasswordField1) {
+        this.jPasswordField1 = jPasswordField1;
+    }
+
+    /**
+     * @return the jPasswordField2
+     */
+    public javax.swing.JPasswordField getjPasswordField2() {
+        return jPasswordField2;
+    }
+
+    /**
+     * @param jPasswordField2 the jPasswordField2 to set
+     */
+    public void setjPasswordField2(javax.swing.JPasswordField jPasswordField2) {
+        this.jPasswordField2 = jPasswordField2;
+    }
+
+    /**
+     * @return the jTextField1
+     */
+    public javax.swing.JTextField getjTextField1() {
+        return jTextField1;
+    }
+
+    /**
+     * @param jTextField1 the jTextField1 to set
+     */
+    public void setjTextField1(javax.swing.JTextField jTextField1) {
+        this.jTextField1 = jTextField1;
+    }
+
+    private void fecharJanela() {
+        this.setVisible(false);
+    }
+
+    private void novoUsuario() {
+
+        String pass1 = getjPasswordField1().getPassword().toString();
+        String pass2 = getjPasswordField2().getPassword().toString();
+        String nomeUser = getjTextField1().getText();
+        String tipo = (String) getjComboBox1().getEditor().getItem();
+        
+        Usuario user = null;
+
+        if (!nomeUser.equalsIgnoreCase("")
+                && !pass1.equalsIgnoreCase("") && !pass2.equalsIgnoreCase("")) {
+            if (!pass1.equalsIgnoreCase(pass2)) {
+                user = defineTipo(tipo);
+                user.setDataCadastro(Calendar.getInstance());
+                user.setNome(nomeUser);
+                user.setSenha(pass1);
+                new UsuarioJpaController(Persistence.createEntityManagerFactory("BancoDeQuestoesPU")).create(user);
+            } else {
+                JOptionPane.showMessageDialog(jButton1, "As senhas informadas estão erradas!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(jButton1, "Campo nome vazio!");
+        }
+    }
+
+    /**
+     * @return the jComboBox1
+     */
+    public javax.swing.JComboBox getjComboBox1() {
+        return jComboBox1;
+    }
+
+    /**
+     * @param jComboBox1 the jComboBox1 to set
+     */
+    public void setjComboBox1(javax.swing.JComboBox jComboBox1) {
+        this.jComboBox1 = jComboBox1;
+    }
+
+    private Usuario defineTipo( String tipo) {
+        
+        Usuario user = null;
+        
+        switch (tipo){
+            case "Professor":
+                user = new Professor();
+            case "Coordenador":
+                user = new Coordenador();
+            default: 
+                user = new Usuario();
+        };
+        
+        return user;
+    }
 }

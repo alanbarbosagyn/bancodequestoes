@@ -4,6 +4,9 @@
  */
 package br.com.bancodequestoes.view;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Alan
@@ -43,6 +46,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu1.setText("Arquivo");
 
         jMenuItem2.setText("jMenuItem2");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem1.setText("jMenuItem1");
@@ -57,18 +65,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Usuario");
 
-        jMenuItem5.setText("jMenuItem5");
+        jMenuItem5.setText("Novo");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem5);
 
-        jMenuItem6.setText("jMenuItem6");
+        jMenuItem6.setText("Buscar");
         jMenu2.add(jMenuItem6);
 
-        jMenuItem7.setText("jMenuItem7");
+        jMenuItem7.setText("Editar");
         jMenu2.add(jMenuItem7);
 
-        jMenuItem8.setText("jMenuItem8");
+        jMenuItem8.setText("Excluir");
         jMenu2.add(jMenuItem8);
 
         jMenuBar1.add(jMenu2);
@@ -89,6 +102,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        exibeFormUsuario();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
@@ -103,4 +124,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     // End of variables declaration//GEN-END:variables
+
+    private void exibeFormUsuario() {
+        JOptionPane.showMessageDialog(rootPane, "Teste");
+        FormUsuario formUser = new FormUsuario();        
+        this.add(formUser);
+    }
 }
