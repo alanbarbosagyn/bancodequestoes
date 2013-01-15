@@ -1,5 +1,7 @@
 package br.com.bancodequestoes.model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import javax.persistence.*;
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 @Entity
 public class Usuario implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
@@ -36,7 +40,9 @@ public class Usuario implements Serializable {
      * @param id the id to set
      */
     public void setId(Long id) {
+        Long oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     /**
@@ -50,7 +56,9 @@ public class Usuario implements Serializable {
      * @param nome the nome to set
      */
     public void setNome(String nome) {
+        String oldNome = this.nome;
         this.nome = nome;
+        changeSupport.firePropertyChange("nome", oldNome, nome);
     }
 
     /**
@@ -64,7 +72,9 @@ public class Usuario implements Serializable {
      * @param senha the senha to set
      */
     public void setSenha(String senha) {
+        String oldSenha = this.senha;
         this.senha = senha;
+        changeSupport.firePropertyChange("senha", oldSenha, senha);
     }
 
     /**
@@ -78,6 +88,16 @@ public class Usuario implements Serializable {
      * @param dataCadastro the dataCadastro to set
      */
     public void setDataCadastro(Calendar dataCadastro) {
+        Calendar oldDataCadastro = this.dataCadastro;
         this.dataCadastro = dataCadastro;
+        changeSupport.firePropertyChange("dataCadastro", oldDataCadastro, dataCadastro);
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
 }

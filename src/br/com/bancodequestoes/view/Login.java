@@ -121,37 +121,41 @@ public class Login extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cancelarLogin(ActionEvent evt) {
+        this.dispose();
         System.exit(0);
     }
 
     private void login(ActionEvent evt) {
         if (getNome().equalsIgnoreCase("") || getPassword().equalsIgnoreCase("")) {
+            
             JOptionPane.showMessageDialog(rootPane, "Campo Nome ou Senha vazio!");
-        }
-        try {
+            
+        } else {
+            
+            try {
 
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("BancoDeQuestoesPU");
-            UsuarioJpaController userDao = new UsuarioJpaController(emf);
+                EntityManagerFactory emf = Persistence.createEntityManagerFactory("BancoDeQuestoesPU");
+                UsuarioJpaController userDao = new UsuarioJpaController(emf);
 
-            EntityManager em = emf.createEntityManager();
+                EntityManager em = emf.createEntityManager();
 
-            javax.persistence.Query query = em.createNamedQuery("Usuario.buscaPorNome");
+                javax.persistence.Query query = em.createNamedQuery("Usuario.buscaPorNome");
 
-            query.setParameter("nome", getNome());
+                query.setParameter("nome", getNome());
 
-            Usuario usuario = (Usuario) query.getSingleResult();
+                Usuario usuario = (Usuario) query.getSingleResult();
 
-            if (!usuario.getSenha().equalsIgnoreCase(getPassword())) {
-                JOptionPane.showMessageDialog(rootPane, "Senha incorreta!");
-            } else {
-                this.dispose();
-                new TelaPrincipal().setVisible(true);
+                if (!usuario.getSenha().equalsIgnoreCase(getPassword())) {
+                    JOptionPane.showMessageDialog(rootPane, "Senha incorreta!");
+                } else {
+                    this.dispose();
+                    new TelaPrincipal().setVisible(true);
+                }
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(rootPane, "Usuário inexistente!");
             }
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(rootPane, "Usuário inexistente!");
         }
-
     }
 
     /**
